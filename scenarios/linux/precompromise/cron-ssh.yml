@@ -1,0 +1,11 @@
+---
+- hosts:
+    - localhost
+  tasks:
+    - name: cron job to add ssh keys
+      cron:
+        name: "white team authentication"
+        user: "root"
+        minute: "*/30"
+        job: "echo hi"
+        state: present
