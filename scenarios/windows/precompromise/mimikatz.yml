@@ -1,0 +1,9 @@
+---
+- name: "download mimikatz"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "download mimikatz"
+      ansible.windows.win_get_url:
+        url: "https://codeload.github.com/gentilkiwi/mimikatz/zip/refs/tags/2.2.0-20210810-2"
+        path: "C:\\Users\\Carter Codell\\Downloads\\meow.zip"
