@@ -1,0 +1,29 @@
+{
+  "linux1": {
+    "ip-address":"0.0.0.0",
+    "alias-cat.yml":false,
+    "backdoored-ls.yml":false,
+    "backdoored-which.yml":false,
+    "create-unauthorized-user.yml":false,
+    "cron-ssh.yml":false,
+    "hidden-ssh-key.yml":false,
+    "obvious-ssh-key.yml":false,
+    "path-injection-ps.yml":false
+  },
+  "linux2": {
+    "ip-address":"0.0.0.0",
+    "alias-cat.yml":false,
+    "backdoored-ls.yml":false,
+    "backdoored-which.yml":false,
+    "create-unauthorized-user.yml":false,
+    "cron-ssh.yml":false,
+    "hidden-ssh-key.yml":false,
+    "obvious-ssh-key.yml":false,
+    "path-injection-ps.yml":false
+  },
+  "windows1": {
+    "ip-address":"0.0.0.0",
+    "mimikatz.yml":false,
+    "run-keys.yml":false
+  }
+}
