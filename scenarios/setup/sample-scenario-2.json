@@ -1,29 +1,38 @@
 {
   "linux1": {
+    "is_linux":true,
     "ip-address":"0.0.0.0",
-    "alias-cat.yml":false,
-    "backdoored-ls.yml":false,
-    "backdoored-which.yml":false,
-    "create-unauthorized-user.yml":false,
-    "cron-ssh.yml":false,
-    "hidden-ssh-key.yml":false,
-    "obvious-ssh-key.yml":false,
-    "path-injection-ps.yml":false
+    "scripts": {
+      "alias-cat.yml":true,
+      "backdoored-ls.yml":true,
+      "backdoored-which.yml":true,
+      "create-unauthorized-user.yml":true,
+      "cron-ssh.yml":false,
+      "hidden-ssh-key.yml":false,
+      "obvious-ssh-key.yml":false,
+      "path-injection-ps.yml":false
+    }
   },
   "linux2": {
+    "is_linux":true,
     "ip-address":"0.0.0.0",
-    "alias-cat.yml":false,
-    "backdoored-ls.yml":false,
-    "backdoored-which.yml":false,
-    "create-unauthorized-user.yml":false,
-    "cron-ssh.yml":false,
-    "hidden-ssh-key.yml":false,
-    "obvious-ssh-key.yml":false,
-    "path-injection-ps.yml":false
+    "scripts": {
+      "alias-cat.yml":false,
+      "backdoored-ls.yml":false,
+      "backdoored-which.yml":false,
+      "create-unauthorized-user.yml":false,
+      "cron-ssh.yml":true,
+      "hidden-ssh-key.yml":true,
+      "obvious-ssh-key.yml":true,
+      "path-injection-ps.yml":true
+    }
   },
   "windows1": {
+    "is_linux":false,
     "ip-address":"0.0.0.0",
-    "mimikatz.yml":false,
-    "run-keys.yml":false
+    "scripts": {
+      "mimikatz.yml":true,
+      "run-keys.yml":true
+    }
   }
 }
