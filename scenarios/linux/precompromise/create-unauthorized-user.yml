@@ -2,6 +2,10 @@
 - name: "create unauthorized user"
   hosts: localhost
   connection: local
+  become: true
+  become_user: azureuser
+  environment:
+    HOME: /home/azureuser
   tasks:
     - name: "add user"
       ansible.builtin.user:
