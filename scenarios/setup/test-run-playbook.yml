@@ -1,0 +1,8 @@
+---
+- name: "test run playbook"
+  hosts: localhost
+  connection: local
+  tasks:
+    - include test-hello-world.yml
+
+

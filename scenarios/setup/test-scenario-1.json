@@ -1,12 +1,12 @@
 {
   "linux1": {
     "is_linux": true,
-    "ip_address":"0.0.0.0",
+    "ip_address":"localhost",
     "scripts": {
-      "alias-cat.yml":true,
-      "backdoored-ls.yml":true,
-      "backdoored-which.yml":false,
-      "create-unauthorized-user.yml":false,
+      "alias-cat.yml":false,
+      "backdoored-ls.yml":false,
+      "backdoored-which.yml":true,
+      "create-unauthorized-user.yml":true,
       "cron-ssh.yml":false,
       "hidden-ssh-key.yml":false,
       "obvious-ssh-key.yml":false,
