@@ -1,7 +1,5 @@
 ---
 - name: "add an application to the Windows registry keys"
-  hosts: localhost
-  connection: local
   tasks:
     - name: "add the registry key"
       ansible.windows.win_regedit:

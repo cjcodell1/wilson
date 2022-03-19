@@ -1,7 +1,5 @@
 ---
 - name: "download mimikatz"
-  hosts: localhost
-  connection: local
   tasks:
     - name: "download mimikatz"
       ansible.windows.win_get_url:
