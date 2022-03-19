@@ -16,7 +16,7 @@ def main():
 
   # For each VM, write an ansible script to a file to run the requested scripts
   for vm_name in list(vms_data.keys()):
-    write_control_ansible(vms_data[vm_name])
+    write_control_ansible(vm_name, vms_data[vm_name])
   
 # ----------------------------------------------------------
 
@@ -47,9 +47,19 @@ def process_scenario_json_file():
 # ----------------------------------------------------------
 
 # For the given VM, write an ansible script to a file to run the requested scripts
-def write_control_ansible(vm_data):
-  print(vm_data)
-  script_dir = hi
+# vm_name: String, name of given VM data
+# vm_data: dict, data for given VM 
+def write_control_ansible(vm_name, vm_data):
+  # Make ansible script to execute all the playbooks
+  with open("ansible_scripts_" + vm_name + ".yml", "w") as f:
+    f.write("---\n")
+    for script in vm_data["scripts"]:
+      f.write("- name: \"run ansible playbook for " + script + "\"\n")
+      f.write("  import_playbook: " + script + "\n")
+
+  # Make inventory for given VM
+  with open("inventory_" + vm_name + ".ini", "w") as f:
+    f.write(vm_data["ip_address"])
 
 # ----------------------------------------------------------
 
