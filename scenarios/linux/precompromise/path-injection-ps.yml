@@ -1,7 +1,5 @@
 ---
 - name: "path injection for ps"
-  hosts: localhost
-  connection: local
   tasks:
     - name: "change $PATH to look at /etc first"
       shell: "export PATH=/etc:$PATH"
