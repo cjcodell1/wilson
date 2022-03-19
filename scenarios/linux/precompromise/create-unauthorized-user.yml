@@ -1,7 +1,5 @@
 ---
 - name: "create unauthorized user"
-  hosts: localhost
-  connection: local
   tasks:
     - name: "add user"
       ansible.builtin.user:
