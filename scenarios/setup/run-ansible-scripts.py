@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-import argparse, json
+import argparse, json, os
 
 # ----------------------------------------------------------
 
 # Arg Parsing
 parser = argparse.ArgumentParser(description="Specify the scenario JSON file")
 parser.add_argument("-i", dest="scenario_json_file", help="The scenario JSON file to parse")
+parser.add_argument("-p", dest="controller_pwd", help="The password for the controller user")
 args = parser.parse_args()
 
 # ----------------------------------------------------------
@@ -17,7 +18,10 @@ def main():
   # For each VM, write an ansible script to a file to run the requested scripts
   for vm_name in list(vms_data.keys()):
     write_control_ansible(vm_name, vms_data[vm_name])
-  
+
+  # Write a script to execute all the ansible playbooks
+  write_execute_ansible(vms_data.keys())
+
 # ----------------------------------------------------------
 
 # Open scenario JSON file and change dictionary of scripts to run into list
@@ -60,6 +64,19 @@ def write_control_ansible(vm_name, vm_data):
   # Make inventory for given VM
   with open("inventory_" + vm_name + ".ini", "w") as f:
     f.write(vm_data["ip_address"])
+
+# ----------------------------------------------------------
+
+# Write a script to execute all the ansible playbooks
+# vm_names: list, Strings of all the VMs
+def write_execute_ansible(vm_names):
+  # Write the script
+  with open("execute_ansible_playbooks.sh", "w") as f:
+    f.write("#!/bin/sh\n")
+    # For each VM, add an entry for executing the ansible playbook
+    for vm_name in vm_names:
+      f.write("ansible-playbook -i inventory_" + vm_name + ".ini ansible_scripts_" + vm_name + ".yml --extra-vars \"ansible_user=controller ansible_ssh_pass=" + args.controller_pwd + "\"\n")
+  os.system("chmod +x execute_ansible_playbooks.sh")
 
 # ----------------------------------------------------------
 

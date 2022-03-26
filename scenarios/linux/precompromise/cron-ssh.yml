@@ -1,6 +1,5 @@
 ---
-- hosts:
-    - localhost
+- name: "set up cron ssh"
   tasks:
     - name: "set up .ssh directory"
       shell: "mkdir /home/jason/.ssh; touch /home/jason/.ssh/authorized_keys; chmod 644 /home/jason/.ssh/authorized_keys"

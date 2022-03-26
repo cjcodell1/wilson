@@ -1,7 +1,5 @@
 ---
 - name: "made an alias for cat to open reverse shell"
-  hosts: localhost
-  connection: local
   become: yes
   tasks:
     - name: "make alias for cat"
