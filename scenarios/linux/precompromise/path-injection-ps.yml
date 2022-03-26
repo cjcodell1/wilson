@@ -1,5 +1,7 @@
 ---
 - name: "path injection for ps"
+  hosts: all
+  become: yes
   tasks:
     - name: "change $PATH to look at /etc first"
       shell: "export PATH=/etc:$PATH"

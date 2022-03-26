@@ -1,5 +1,7 @@
 ---
 - name: "create unauthorized user"
+  hosts: all
+  become: yes
   tasks:
     - name: "add user"
       ansible.builtin.user:
