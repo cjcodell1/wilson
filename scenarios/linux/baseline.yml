@@ -8,13 +8,22 @@
         name: alice
         # password: "rebus boost truss siege"
         password: "$6$kemQqvYY31aNZ6Zk$Swgs.9g17HZ9uUpsbitDH4TRsnc2FR3a1ryai9M/Qv/iw5pMFdVkU8nbkJeBx/1iMaMFIhXlbLF7SBJwPB8lX0"
+      community.general.ssh_config:
+        host: "*"
+        strict_host_key_checking: "no"
     - name: "add bob"
       ansible.builtin.user:
         name: bob
         # password: "tiger banal slump crank"
         password: "$6$4OdFIdtAeoaUK4kE$oFkAKnz88xXVl7KBPHVMYhT/Uq0FiHWeMj9fF7FhpWJUF4lfRQ1M3OA3KlAwcnYMjIZuGflAIq3biL4lz36SN0"
+      community.general.ssh_config:
+        host: "*"
+        strict_host_key_checking: "no"
     - name: "add charlie"
       ansible.builtin.user:
         name: charlie
         # password: "gorge query drink favor"
         password: "$6$AG4InyNjZznxEX1n$6CjSRDdCn5miDD8cfS3NhQ/S4AEY7jdnj.YAlMPE1GrN2Bwyi3lnfawps0RuGfVuKP18rxw9zyyJhebl6XTnH/"
+      community.general.ssh_config:
+        host: "*"
+        strict_host_key_checking: "no"
