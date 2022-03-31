@@ -18,3 +18,8 @@
         name: charlie
         # password: "gorge query drink favor"
         password: "$6$AG4InyNjZznxEX1n$6CjSRDdCn5miDD8cfS3NhQ/S4AEY7jdnj.YAlMPE1GrN2Bwyi3lnfawps0RuGfVuKP18rxw9zyyJhebl6XTnH/"
+    - name: "add controller"
+      ansible.builtin.user:
+        name: controller
+        # password: "abbey tangy panic solar"
+        password: "$6$Spyio54651JH1lm/$WMjBBqG1RGj5vhKhfmGSBw1CaCnOy30TYb6eXfbmqc5NtDzqg.mQMQ/SeY/8YJ73eA6U63htRGeY2smZfOXGf/"
