@@ -276,6 +276,7 @@ resource "azurerm_windows_virtual_machine" "Env1_Win" {
   admin_username      = "adminuser"
   admin_password      = "P@$$w0rd1234!"
   availability_set_id = azurerm_availability_set.Env1_DemoASet.id
+  computer_name       = "WindowsVM"
   network_interface_ids = [
     azurerm_network_interface.Env1_NIC3[each.key].id,
   ]
