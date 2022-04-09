@@ -30,20 +30,19 @@
         "inline": [
           "apt-get update",
           "apt-get upgrade -y",
-          "apt-get -y install nginx",
           "apt-get install -y software-properties-common",
           "add-apt-repository --yes --update ppa:ansible/ansible",
+          "apt-get update",
+          "apt-get upgrade -y",
           "apt-get -y install ansible",
           "apt-get -y install git",
            
           "useradd -m controller",
           "echo 'password' | passwd control --stdin",
-          "git clone https://{{user `username`}}:{{user `password`}}@github.com/cjcodell1/wilson.git",
-          "cd wilson",
-          "git checkout packer-image",
+          "git clone https://github.com/cjcodell1/wilson.git",
           "mkdir /home/controller/linux",
-          "cp -r scenarios/linux/ /home/controller/linux",
-          "chown -R controller:controller /home/controller/linux",
+          "cp -r wilson/scenarios/linux/ /home/controller/",
+          "chown -R controller:controller /home/controller/",
   
           "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
         ],
