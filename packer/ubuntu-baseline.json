@@ -34,13 +34,13 @@
           "apt-get -y install nginx",
           "apt-get install -y software-properties-common",
           "add-apt-repository --yes --update ppa:ansible/ansible",
+          "apt-get update",
+          "apt-get upgrade -y",
           "apt-get -y install ansible",
           "apt-get -y install git",
            
-          "git clone https://{{user `username`}}:{{user `password`}}@github.com/jasonhewgill/Azure_Terraform.git",
-          "cd Azure_Terraform",
-          "git checkout Packer-Build",
-          "ansible-playbook baseline.yml",
+          "git clone https://github.com/cjcodell1/wilson.git",
+          "ansible-playbook wilson/linux/baseline.yml",
   
           "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
         ],

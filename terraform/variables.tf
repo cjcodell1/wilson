@@ -21,12 +21,12 @@ variable "resource_group_location" {
 
   variable "vm_names" {
   description = "VM Names"
-  default     = ["vm1","vm2","vm3"]
+  default     = ["linux_1","linux_2","linux_3"]
   type        = set(string)
 } 
 
   variable "vm_names1" {
   description = "VM Names"
-  default     = ["vmx"]
+  default     = ["windows_1"]
   type        = set(string)
 }
