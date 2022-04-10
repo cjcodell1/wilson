@@ -23,3 +23,5 @@
         name: controller
         # password: "abbey tangy panic solar"
         password: "$6$Spyio54651JH1lm/$WMjBBqG1RGj5vhKhfmGSBw1CaCnOy30TYb6eXfbmqc5NtDzqg.mQMQ/SeY/8YJ73eA6U63htRGeY2smZfOXGf/"
+    - name: "make controller a sudoer"
+      shell: "usermod -aG sudo controller"

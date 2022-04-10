@@ -38,7 +38,8 @@
           "apt-get -y install git",
            
           "useradd -m controller",
-          "echo 'password' | passwd control --stdin",
+          "echo 'password' | passwd controller --stdin",
+          "usermod -aG sudo controller",
           "git clone https://github.com/cjcodell1/wilson.git",
           "mkdir /home/controller/linux",
           "cp -r wilson/scenarios/linux/ /home/controller/",
