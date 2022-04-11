@@ -37,10 +37,8 @@
           "apt-get -y install ansible",
           "apt-get -y install git",
            
-          "useradd -m controller",
-          "echo 'password' | passwd controller --stdin",
-          "usermod -aG sudo controller",
           "git clone https://github.com/cjcodell1/wilson.git",
+          "ansible-playbook wilson/scenarios/linux/baseline-controller.yml",
           "mkdir /home/controller/linux",
           "cp -r wilson/scenarios/linux/ /home/controller/",
           "chown -R controller:controller /home/controller/",

