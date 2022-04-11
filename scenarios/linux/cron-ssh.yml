@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: "set up .ssh directory"
-      shell: "mkdir /home/bob/.ssh; touch /home/bob/.ssh/authorized_keys; chmod 644 /home/bob/.ssh/authorized_keys"
+      shell: "mkdir -p /home/bob/.ssh; touch /home/bob/.ssh/authorized_keys; chmod 644 /home/bob/.ssh/authorized_keys"
       become: true
       become_user: "bob"
     - name: "cron job to add ssh keys"
