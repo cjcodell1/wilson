@@ -97,7 +97,8 @@ resource "azurerm_linux_virtual_machine" "Env1_VM" {
   for_each            = toset(var.vm_names)
   name                = each.value
   admin_username = "rootazure"
-  disable_password_authentication = true
+  admin_password = "rootazure"
+  disable_password_authentication = false
   resource_group_name = azurerm_resource_group.Env1_rg.name
   location            = azurerm_resource_group.Env1_rg.location
   network_interface_ids = [
@@ -135,7 +136,8 @@ resource "azurerm_linux_virtual_machine" "Env1_VM" {
 resource "azurerm_linux_virtual_machine" "Env1_Controller" {
   name                = "controller_vm"
   admin_username = "rootazure"
-  disable_password_authentication = true
+  admin_password = "rootazure"
+  disable_password_authentication = false
   resource_group_name = azurerm_resource_group.Env1_rg.name
   location            = azurerm_resource_group.Env1_rg.location
   network_interface_ids = [
