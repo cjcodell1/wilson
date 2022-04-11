@@ -97,7 +97,7 @@ resource "azurerm_linux_virtual_machine" "Env1_VM" {
   for_each            = toset(var.vm_names)
   name                = each.value
   admin_username = "rootazure"
-  admin_password      = "P@ssw0rd"
+  admin_password      = "P@ssw0rd1234@@"
   disable_password_authentication = false
   resource_group_name = azurerm_resource_group.Env1_rg.name
   location            = azurerm_resource_group.Env1_rg.location
@@ -136,7 +136,7 @@ resource "azurerm_linux_virtual_machine" "Env1_VM" {
 resource "azurerm_linux_virtual_machine" "Env1_Controller" {
   name                = "controller_vm"
   admin_username = "rootazure"
-  admin_password      = "P@ssw0rd"
+  admin_password      = "P@ssw0rd1234@@"
   disable_password_authentication = false
   resource_group_name = azurerm_resource_group.Env1_rg.name
   location            = azurerm_resource_group.Env1_rg.location
@@ -276,7 +276,7 @@ resource "azurerm_windows_virtual_machine" "Env1_Win" {
   location            = azurerm_resource_group.Env1_rg.location
   size                = "Standard_F2"
   admin_username      = "adminuser"
-  admin_password      = "P@ssw0rd"
+  admin_password      = "P@ssw0rd1234@@"
   availability_set_id = azurerm_availability_set.Env1_DemoASet.id
   computer_name       = "WindowsVM"
   network_interface_ids = [
