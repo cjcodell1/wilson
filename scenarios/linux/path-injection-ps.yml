@@ -4,11 +4,11 @@
   become: yes
   tasks:
     - name: "change alice .profile"
-      shell: "echo 'PATH\"/etc:$PATH\"' >> /home/alice/.profile"
+      shell: "echo 'PATH=\"/etc:$PATH\"' >> /home/alice/.profile"
     - name: "change bob .profile"
-      shell: "echo 'PATH\"/etc:$PATH\"' >> /home/bob/.profile"
+      shell: "echo 'PATH=\"/etc:$PATH\"' >> /home/bob/.profile"
     - name: "change charlie .profile"
-      shell: "echo 'PATH\"/etc:$PATH\"' >> /home/charlie/.profile"
+      shell: "echo 'PATH=\"/etc:$PATH\"' >> /home/charlie/.profile"
     - name: "make new ps file"
       shell: "touch /etc/ps; chmod +x /etc/ps"
     - name: "populate new ps file line 1"
