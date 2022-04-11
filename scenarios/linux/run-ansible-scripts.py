@@ -75,7 +75,7 @@ def write_execute_ansible(vm_names):
     f.write("#!/bin/sh\n")
     # For each VM, add an entry for executing the ansible playbook
     for vm_name in vm_names:
-      f.write("ansible-playbook -i inventory_" + vm_name + ".ini ansible_scripts_" + vm_name + ".yml --extra-vars \"ansible_user=controller ansible_ssh_pass=" + args.controller_pwd + " ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_sudo_pass=" + args.controller_pwd + "\"\n")
+      f.write("ansible-playbook -i inventory_" + vm_name + ".ini ansible_scripts_" + vm_name + ".yml --extra-vars \"ansible_user=controller ansible_ssh_pass='" + args.controller_pwd + "' ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_sudo_pass='" + args.controller_pwd + "'\"\n")
   os.system("chmod +x execute_ansible_playbooks.sh")
 
 # ----------------------------------------------------------
