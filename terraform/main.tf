@@ -277,7 +277,6 @@ resource "azurerm_windows_virtual_machine" "Env1_Win" {
   size                = "Standard_F2"
   admin_username      = "adminuser"
   admin_password      = "P@ssw0rd"
-  disable_password_authentication = false
   availability_set_id = azurerm_availability_set.Env1_DemoASet.id
   computer_name       = "WindowsVM"
   network_interface_ids = [
