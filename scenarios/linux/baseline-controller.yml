@@ -1,0 +1,12 @@
+---
+- name: "create baseline for ubuntu"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "add controller"
+      ansible.builtin.user:
+        name: controller
+        # password: "password"
+        password: "$6$l6YxHjmxFk63Kw3o$0zPejMvJeQQIbzVMTa2Cmc2zTQj.y7xVZfhDCRp51luKYKK0iCS53DKWbEmBVkxhHDVB0EyQDAmdW0W179Vpg/"
+    - name: "make controller a sudoer"
+      shell: "usermod -aG sudo controller"
