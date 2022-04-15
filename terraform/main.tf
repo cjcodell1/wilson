@@ -266,6 +266,18 @@ resource "azurerm_network_security_group" "Env1_NSG" {
     source_address_prefix      = "10.0.3.0/24"
     destination_address_prefix = "*"
   }
+
+  security_rule {
+    name                       = "AllowSHH"
+    priority                   = 121
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "TCP"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 
