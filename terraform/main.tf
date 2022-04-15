@@ -43,6 +43,12 @@ resource "azurerm_public_ip" "Env1_PubIP2" {
   location            = azurerm_resource_group.Env1_rg.location
   allocation_method   = "Dynamic"
 }
+resource "azurerm_public_ip" "Env1_PubIP4" {
+  name                = "Env1_PubIP4"
+  resource_group_name = azurerm_resource_group.Env1_rg.name
+  location            = azurerm_resource_group.Env1_rg.location
+  allocation_method   = "Dynamic"
+}
 
 ## <https://www.terraform.io/docs/providers/azurerm/r/network_interface.html>
 //this
@@ -71,6 +77,26 @@ resource "azurerm_network_interface" "Env1_NIC2" {
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.Env1_PubIP2.id
+  }
+}
+
+resource "azurerm_subnet" "subnet2" {
+  name                 = "Env1_rg_external"
+  resource_group_name  = azurerm_resource_group.Env1_rg.name
+  virtual_network_name = azurerm_virtual_network.Env1_vnet.name
+  address_prefixes       = ["10.0.3.0/24"]
+}
+
+resource "azurerm_network_interface" "Env1_NIC4" {
+  name                = "Env1_NIC4"
+  location            = azurerm_resource_group.Env1_rg.location
+  resource_group_name = azurerm_resource_group.Env1_rg.name
+  
+  ip_configuration {
+    name                          = "Env1_rg_external"
+    subnet_id                     = azurerm_subnet.subnet2.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.Env1_PubIP4.id
   }
 }
 
@@ -172,6 +198,45 @@ resource "azurerm_linux_virtual_machine" "Env1_Controller" {
 
 }
 
+resource "azurerm_linux_virtual_machine" "Env1_VM_Attacker" {
+  name                = "Env1_VM_Attacker"
+  admin_username = "rootazure"
+  admin_password      = "P@ssw0rd1234@@"
+  disable_password_authentication = false
+  resource_group_name = azurerm_resource_group.Env1_rg.name
+  location            = azurerm_resource_group.Env1_rg.location
+  network_interface_ids = [
+    azurerm_network_interface.Env1_NIC4.id,
+    ]
+  availability_set_id = azurerm_availability_set.Env1_DemoASet.id
+  size               = "Standard_DS1_v2" #guillermo
+  computer_name = "attacker"   
+//this
+  os_disk {
+    name              = "Attacker_disk"
+    caching           = "ReadWrite"
+    //create_option     = "FromImage"
+    storage_account_type = "Standard_LRS"
+}
+#https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS" 
+    version   = "latest"
+  }
+  
+  //source_image_id = data.azurerm_image.MDisk.id
+
+#https://stackoverflow.com/questions/63413564/terraform-azure-vm-ssh-key
+
+   admin_ssh_key {
+        username       = "rootazure"
+        public_key     = tls_private_key.example_ssh.public_key_openssh
+    }
+
+}
+
 
 resource "azurerm_network_security_group" "Env1_NSG" {
   name                = "Env1_http_and_ssh"
@@ -179,40 +244,28 @@ resource "azurerm_network_security_group" "Env1_NSG" {
   resource_group_name = azurerm_resource_group.Env1_rg.name
 
   security_rule {
-    name                       = "AllowHTTPInBound"
+    name                       = "AllowAllInternal"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "*"
     source_port_range          = "*"
-    destination_port_range     = "443"
-    source_address_prefix      = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "10.0.2.0/24"
     destination_address_prefix = "*"
   }
 
   security_rule {
-    name                       = "AllowSSHInBound"
+    name                       = "AllowAllExternal"
     priority                   = 120
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "*"
     source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "10.0.3.0/24"
     destination_address_prefix = "*"
   }
-    security_rule {
-    name                       = "SQLConnection"
-    priority                   = 121
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "TCP"
-    source_port_range          = "*"
-    destination_port_range     = "1433"
-    source_address_prefix      = "AzureCloud"
-    destination_address_prefix = "*"
-  }
- 
 }
 
 
@@ -228,6 +281,16 @@ resource "azurerm_network_interface_security_group_association" "NSG-Association
 
 resource "azurerm_network_interface_security_group_association" "NSG-Association1" {
   network_interface_id =    azurerm_network_interface.Env1_NIC2.id 
+  network_security_group_id = azurerm_network_security_group.Env1_NSG.id
+}
+
+resource "azurerm_network_interface_security_group_association" "NSG-Association1" {
+  network_interface_id =    azurerm_network_interface.Env1_NIC3.id 
+  network_security_group_id = azurerm_network_security_group.Env1_NSG.id
+}
+
+resource "azurerm_network_interface_security_group_association" "NSG-Association1" {
+  network_interface_id =    azurerm_network_interface.Env1_NIC4.id 
   network_security_group_id = azurerm_network_security_group.Env1_NSG.id
 }
 
