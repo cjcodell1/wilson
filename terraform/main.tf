@@ -285,6 +285,7 @@ resource "azurerm_network_interface_security_group_association" "NSG-Association
 }
 
 resource "azurerm_network_interface_security_group_association" "NSG-Association2" {
+  for_each = toset(var.vm_names1)
   network_interface_id =    azurerm_network_interface.Env1_NIC3[each.key].id 
   network_security_group_id = azurerm_network_security_group.Env1_NSG.id
 }
