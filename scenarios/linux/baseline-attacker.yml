@@ -1,0 +1,12 @@
+---
+- name: "create baseline for attacker vm"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "add attacker"
+      ansible.builtin.user:
+        name: attacker
+        # password: "attacker"
+        password: "$6$mlv.jofmpcmGEJDN$Cf5qSWjMKp7/n8hLfAGX.toA4JHdExjmLnhYSjfk1wSSnXbD.Vuq7liL27kEY04FgCl4GQe9RxZydP7DKwgd11"
+    - name: "make attacker a sudoer"
+      shell: "usermod -aG sudo attacker"
