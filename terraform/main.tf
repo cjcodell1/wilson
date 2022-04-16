@@ -396,5 +396,5 @@ resource "azurerm_sentinel_data_connector_microsoft_cloud_app_security" "MCAS_Co
 
 resource "azurerm_sentinel_data_connector_azure_active_directory" "AAD_Connect" {
   name                       = "AAD_Connect"
-  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Analytics.workspace_resource_id
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1LogAnalytics.workspace_resource_id
 }
