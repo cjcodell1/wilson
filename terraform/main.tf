@@ -374,3 +374,27 @@ resource "azurerm_network_interface_security_group_association" "NSG-Association
 }
 
 
+# Azure Sentinel Rules
+resource "azurerm_sentinel_alert_rule_scheduled" "TestAlert" {
+  name                       = "TestAlert"
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1LogAnalytics.workspace_resource_id
+  display_name               = "TestDisplayNAme"
+  severity                   = "High"
+  query                      = <<QUERY
+AzureActivity |
+  where OperationName == "Create or Update Virtual Machine" or OperationName =="Create Deployment" |
+  where ActivityStatus == "Succeeded" |
+  make-series dcount(ResourceId) default=0 on EventSubmissionTimestamp in range(ago(7d), now(), 1d) by Caller
+QUERY
+}
+
+#https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_microsoft_cloud_app_security
+resource "azurerm_sentinel_data_connector_microsoft_cloud_app_security" "MCAS_Connect" {
+  name                       = "MCAS_Connect"
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1LogAnalytics.workspace_resource_id
+}
+
+resource "azurerm_sentinel_data_connector_azure_active_directory" "AAD_Connect" {
+  name                       = "AAD_Connect"
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Analytics.workspace_resource_id
+}
