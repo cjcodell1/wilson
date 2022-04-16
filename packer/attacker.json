@@ -13,7 +13,7 @@
       "subscription_id": "{{user `subscription_id`}}",
       "tenant_id": "{{user `tenant_id`}}",
       "managed_image_resource_group_name": "MDisk_rg",
-      "managed_image_name": "controller",
+      "managed_image_name": "attacker",
 
       "os_type": "Linux",
       "image_publisher": "Canonical",
