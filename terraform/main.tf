@@ -118,6 +118,10 @@ data "azurerm_image" "ControllerDisk" {
   name                = "controller"
   resource_group_name = "MDisk_rg"
 }
+data "azurerm_image" "AttackerDisk" {
+  name                = "attacker"
+  resource_group_name = "MDisk_rg"
+}
 #<https://www.terraform.io/docs/providers/azurerm/r/windows_virtual_machine.html>
 resource "azurerm_linux_virtual_machine" "Env1_VM" {
   for_each            = toset(var.vm_names)
@@ -199,7 +203,7 @@ resource "azurerm_linux_virtual_machine" "Env1_Controller" {
 }
 
 resource "azurerm_linux_virtual_machine" "Env1_VM_Attacker" {
-  name                = "Env1_VM_Attacker"
+  name                = "attacker_vm"
   admin_username = "rootazure"
   admin_password      = "P@ssw0rd1234@@"
   disable_password_authentication = false
@@ -210,23 +214,23 @@ resource "azurerm_linux_virtual_machine" "Env1_VM_Attacker" {
     ]
   availability_set_id = azurerm_availability_set.Env1_DemoASet.id
   size               = "Standard_DS1_v2" #guillermo
-  computer_name = "attacker"   
+  computer_name = "TestForEachVMs1"   
 //this
   os_disk {
-    name              = "Attacker_disk"
+    //name              = "VM1_disk"
     caching           = "ReadWrite"
     //create_option     = "FromImage"
     storage_account_type = "Standard_LRS"
 }
 #https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
-  source_image_reference {
+  /*source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "18.04-LTS" 
     version   = "latest"
-  }
+  }*/
   
-  //source_image_id = data.azurerm_image.MDisk.id
+  source_image_id = data.azurerm_image.AttackerDisk.id
 
 #https://stackoverflow.com/questions/63413564/terraform-azure-vm-ssh-key
 
