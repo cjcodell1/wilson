@@ -387,14 +387,3 @@ AzureActivity |
   make-series dcount(ResourceId) default=0 on EventSubmissionTimestamp in range(ago(7d), now(), 1d) by Caller
 QUERY
 }
-
-#https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_microsoft_cloud_app_security
-resource "azurerm_sentinel_data_connector_microsoft_cloud_app_security" "MCAS_Connect" {
-  name                       = "MCAS_Connect"
-  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
-}
-
-resource "azurerm_sentinel_data_connector_azure_active_directory" "AAD_Connect" {
-  name                       = "AAD_Connect"
-  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
-}
