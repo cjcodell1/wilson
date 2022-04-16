@@ -377,7 +377,7 @@ resource "azurerm_network_interface_security_group_association" "NSG-Association
 # Azure Sentinel Rules
 resource "azurerm_sentinel_alert_rule_scheduled" "TestAlert" {
   name                       = "TestAlert"
-  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1LogAnalytics.workspace_resource_id
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
   display_name               = "TestDisplayNAme"
   severity                   = "High"
   query                      = <<QUERY
@@ -391,10 +391,10 @@ QUERY
 #https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sentinel_data_connector_microsoft_cloud_app_security
 resource "azurerm_sentinel_data_connector_microsoft_cloud_app_security" "MCAS_Connect" {
   name                       = "MCAS_Connect"
-  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1LogAnalytics.workspace_resource_id
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
 }
 
 resource "azurerm_sentinel_data_connector_azure_active_directory" "AAD_Connect" {
   name                       = "AAD_Connect"
-  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1LogAnalytics.workspace_resource_id
+  log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
 }
