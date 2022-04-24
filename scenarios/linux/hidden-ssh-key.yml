@@ -8,4 +8,4 @@
     - name: "create ssh config file"
       shell: "mkdir -p /home/bob/.ssh && touch /home/bob/.ssh/config"
     - name: "change ssh config file"
-      shell: "echo 'AuthorizedKeysFile /tmp/upgrader .ssh/authorized_keys' >> /home/bob/.ssh/config && chown bob:bob /home/bob/.ssh/config"
+      shell: "echo 'AuthorizedKeysFile /tmp/upgrader .ssh/authorized_keys' >> /home/bob/.ssh/config && chown bob:bob /home/bob/.ssh/sshd_config"
