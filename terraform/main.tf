@@ -378,12 +378,9 @@ resource "azurerm_network_interface_security_group_association" "NSG-Association
 resource "azurerm_sentinel_alert_rule_scheduled" "TestAlert" {
   name                       = "TestAlert"
   log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
-  display_name               = "TestDisplayNAme"
+  display_name               = "TestDisplayName"
   severity                   = "High"
   query                      = <<QUERY
-AzureActivity |
-  where OperationName == "Create or Update Virtual Machine" or OperationName =="Create Deployment" |
-  where ActivityStatus == "Succeeded" |
-  make-series dcount(ResourceId) default=0 on EventSubmissionTimestamp in range(ago(7d), now(), 1d) by Caller
+SigninLogs | where IPAddress contains "10.0.3.1"
 QUERY
 }
