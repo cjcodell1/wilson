@@ -8,7 +8,6 @@
       "backdoored-which.yml":false,
       "create-unauthorized-user.yml":false,
       "cron-ssh.yml":false,
-      "hidden-ssh-key.yml":false,
       "obvious-ssh-key.yml":false,
       "path-injection-ps.yml":false
     }
