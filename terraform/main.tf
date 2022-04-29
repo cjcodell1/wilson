@@ -375,10 +375,10 @@ resource "azurerm_network_interface_security_group_association" "NSG-Association
 
 
 # Azure Sentinel Rules
-resource "azurerm_sentinel_alert_rule_scheduled" "NotFinalName" {
-  name                       = "NotFinalName"
+resource "azurerm_sentinel_alert_rule_scheduled" "SentinelRule" {
+  name                       = "SentinelRule"
   log_analytics_workspace_id = azurerm_log_analytics_solution.Env1Sentinel.workspace_resource_id
-  display_name               = "NotFinalDisplayName"
+  display_name               = "SentinelRuleDisplayName"
   severity                   = "High"
   query                      = <<QUERY
 SigninLogs | where IPAddress contains "10.0.3.1"
