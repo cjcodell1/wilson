@@ -92,25 +92,3 @@ The `which` command is backdoored and displays "/bin/ps" when `which ps` is call
 
 ## Windows Attacks - Current
 Please note that these have not been tested in the Azure environment, and while they are included in this repository, they should be used with caution.
-### Mimikatz
-#### Description
-hello
-#### Detection
-hello
-#### Mediation
-hello
-#### Notes
-* hello
-
-### Run Keys
-#### Description
-hello
-#### Detection
-hello
-#### Mediation
-hello
-#### Notes
-* hello
-
-## Windows Attacks - Future Considerations
-hello
