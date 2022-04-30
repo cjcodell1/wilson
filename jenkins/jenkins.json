@@ -1,0 +1,121 @@
+//https://www.shellhacks.com/jenkins-pipeline-input-step-example/#:~:text=In%20Jenkins%20declarative%20pipelines%20it%20is%20possible%20to,environment%20variable%20and%20used%20in%20the%20next%20steps.
+
+pipeline {
+    agent any
+    parameters {
+        choice(choices: "small\nmedium\nlarge", description: '', name: 'BRANCH_NAME')
+        string(name: "ARM_CLIENT_ID", defaultValue: "", description: 'Enter Client ID', trim:true)
+        string(name: "ARM_CLIENT_SECRET", defaultValue: "", description: 'Enter Client Secret', trim:true)
+  }
+    environment {
+    ARM_SUBSCRIPTION_ID='XXXXXXXXXX'
+    ARM_TENANT_ID='XXXXXXXXXX'
+  }
+    stages {
+
+  //https://naiveskill.com/jenkins-pipeline-if-statement/
+            stage('Hello') {
+        steps {
+            script {
+                if (env.BRANCH_NAME == 'SMALL') 
+                    {
+                    echo 'Hello from SMALL branch'
+                    git branch: 'main', credentialsId: 'XXXXXXXXXX', url: 'https://github.com/cjcodell1/wilson.git'
+                    }
+                else if (env.BRANCH_NAME == 'MEDIUM') 
+                    {
+                    echo 'Hello from MEDIUM branch'
+                    git branch: 'main', credentialsId: 'XXXXXXXXXX', url: 'https://github.com/cjcodell1/wilson.git'
+                    }
+                else {
+                    sh "echo 'Hello from LARGE branch!'"
+                    git branch: 'main', credentialsId: 'XXXXXXXXXX', url: 'https://github.com/cjcodell1/wilson.git'   
+                    }
+                }
+        }
+            }    
+    stage('Packer-Build'){
+            steps{
+                        withCredentials([usernamePassword(credentialsId: 'XXXXXXXXXX', 
+                        passwordVariable: 'ARM_CLIENT_SECRET', 
+                        usernameVariable: 'ARM_CLIENT_ID')]) {
+                        withCredentials([usernamePassword(credentialsId: 'XXXXXXXXXX', 
+                        passwordVariable: 'GIT_CLIENT_SECRET', 
+                        usernameVariable: 'GIT_ID')]) {
+                sh '''
+                az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
+                az group create --name MDisk_rg --location eastus
+                packer build -var "username=$GIT_ID" -var "password=$GIT_CLIENT_SECRET" packer/ubuntu-baseline.json
+                packer build -var "username=$GIT_ID" -var "password=$GIT_CLIENT_SECRET" packer/controller.json
+                packer build -var "username=$GIT_ID" -var "password=$GIT_CLIENT_SECRET" packer/attacker.json
+                '''
+                  }
+            }
+        }
+    }
+                stage('Terraform Init'){
+            steps{
+                        withCredentials([usernamePassword(credentialsId: 'XXXXXXXXXX', 
+                        passwordVariable: 'ARM_CLIENT_SECRET', 
+                        usernameVariable: 'ARM_CLIENT_ID')]) {
+                dir("terraform"){
+                    sh '''
+                    az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
+                    terraform init
+                    '''
+                }//sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Plan'){
+            steps{
+          withCredentials([usernamePassword(credentialsId: 'XXXXXXXXXX', 
+                          passwordVariable: 'ARM_CLIENT_SECRET', 
+                          usernameVariable: 'ARM_CLIENT_ID')]) {
+        dir("terraform"){
+         sh '''
+          az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
+          az account set -s $ARM_SUBSCRIPTION_ID
+          terraform plan -json 
+         '''
+                    }
+        }
+        }
+        }
+        stage('Terraform Apply'){
+            steps{
+          withCredentials([usernamePassword(credentialsId: 'XXXXXXXXXX', 
+                          passwordVariable: 'ARM_CLIENT_SECRET', 
+                          usernameVariable: 'ARM_CLIENT_ID')]) {
+        // login Azure
+        dir("terraform"){
+        sh '''
+          az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
+          az account set -s $ARM_SUBSCRIPTION_ID
+        '''
+        sh 'terraform apply --auto-approve'
+        sh 'terraform output -raw tls_private_key'
+        }
+                }
+                } 
+        }/*
+}
+        /*herestage('Terraform destroy'){
+            steps{
+                  withCredentials([usernamePassword(credentialsId: 'TestCredential', 
+                          passwordVariable: 'ARM_CLIENT_SECRET', 
+                          usernameVariable: 'ARM_CLIENT_ID')]) {
+        // login Azure
+        dir("terraform"){
+        sh '''
+          az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
+          az account set -s $ARM_SUBSCRIPTION_ID
+        '''
+            sh 'terraform destroy --auto-approve'
+        }
+            }
+                 } 
+                 }here*/
+}
+}
